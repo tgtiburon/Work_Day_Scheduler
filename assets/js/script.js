@@ -5,47 +5,47 @@ console.log("script.js loaded");
 let hoursObj = [
     {
         hourNum: 0,
-        hourText: "9 a.m.",
+        hourText: "9AM",
         hourTaskText: ""
     },
     {
         hourNum: 1,
-        hourText: "10 a.m.",
+        hourText: "10AM",
         hourTaskText: ""
     },
     {
         hourNum: 2,
-        hourText: "11 a.m.",
+        hourText: "11AM",
         hourTaskText: ""
     },
     {
         hourNum: 3,
-        hourText: "12 p.m.",
+        hourText: "12PM",
         hourTaskText: ""
     },
     {
         hourNum: 4,
-        hourText: "1 p.m.",
+        hourText: "1PM",
         hourTaskText: ""
     },
     {
         hourNum: 5,
-        hourText: "2 p.m.",
+        hourText: "2PM",
         hourTaskText: ""
     },
     {
         hourNum: 6,
-        hourText: "3 p.m.",
+        hourText: "3PM",
         hourTaskText: ""
     },
     {
         hourNum: 7,
-        hourText: "4 p.m.",
+        hourText: "4PM",
         hourTaskText: ""
     },
     {
         hourNum: 8,
-        hourText: "5 p.m.",
+        hourText: "5PM",
         hourTaskText: ""
     }
 ];
@@ -67,57 +67,53 @@ let initalSetup = function ()  {
     //create elements to make the hourly list
   
 
-    let Hour9Div = $("<div>")
-        .addClass("timeBlocks col-12  border border-dark")
-        .text("hour9Div");
-    let Hour10Div = $("<div>")
-        .addClass("timeBlocks col-12  border border-dark")
-        .text("hour10Div");
-    let Hour11Div = $("<div>")
-        .addClass("timeBlocks col-12  border border-dark")
-        .text("hour11Div");
-    let Hour12Div = $("<div>")
-        .addClass("timeBlocks col-12  border border-dark")
-        .text("hour12Div");
-    let Hour1Div = $("<div>")
-        .addClass("timeBlocks col-12  border border-dark")
-        .text("hour1Div");
-    let Hour2Div = $("<div>")
-        .addClass("timeBlocks col-12  border border-dark")
-        .text("hour2Div");
-    let Hour3Div = $("<div>")
-        .addClass("timeBlocks col-12  border border-dark")
-        .text("hour3Div");
-    let Hour4Div = $("<div>")
-        .addClass("timeBlocks col-12  border border-dark")
-        .text("hour4Div");
-    let Hour5Div = $("<div>")
-        .addClass("timeBlocks col-12  border border-dark")
-        .text("hour5Div");
-
-   
-
-     $(".container").append(Hour9Div);
-     $(".container").append(Hour10Div);
-     $(".container").append(Hour11Div);
-     $(".container").append(Hour12Div);
-     $(".container").append(Hour1Div);
-     $(".container").append(Hour2Div);
-     $(".container").append(Hour3Div);
-     $(".container").append(Hour4Div);
-     $(".container").append(Hour5Div);
-
   //debugger;
-    for (let i = 0; i < 4; i++) {
-        //const element = 4[i];
-        let tmpStr = "hour" + i + "Div";
-        let objName = tmpStr;
-        objName = $("<div>")
-        .addClass("timeBlocks col-12  border border-dark ")
-        .text(tmpStr);
+    for (let i = 0; i < 9; i++) {
+    
+         // add the 3 sub divs
 
-        $(".container").append(objName);
-        console.log(objName);
+         // add the hour to the left
+         // creating a string to make our elementname
+         // hour1TimeDivEl would be the first
+        // let tmpStr1 = "hour"+ i + "TimeDivEl";
+        // let objName1 = tmpStr1;
+         let objName1 = "hour" + i + "TextDivEl";
+         objName1 = $("<div>")
+         .addClass("hour col-1 ")
+         .text(hoursObj[i].hourText);
+         // set the id so we can get it later
+         let idStr =("hour" + i + "TextID") ;
+         $(objName1).attr("id", idStr);
+         $(".container").append(objName1);
+         console.log(objName1);
+
+        // add the task section to the middle
+        let tmpStr2 = "hour" + i + "taskDivEl";
+        let objName2 = tmpStr2;
+        objName2 = $("<div>")
+        .addClass("time-block col-10  border")
+        .text("Sample text");
+        idStr =("hour" + i + "TaskID") ;
+        $(objName2).attr("id", idStr);
+
+        $(".container").append(objName2);
+        console.log(objName2);
+
+        //add the save button to the right
+        let tmpStr3 = "hour" + i + "taskDivEl";
+        let objName3 = tmpStr3;
+        objName3 = $("<div>")
+        .addClass("saveBtn col-1  border border-dark ");
+        idStr =("hour" + i + "SaveID") ;
+        $(objName3).attr("id", idStr);
+
+        $(".container").append(objName3);
+        console.log(objName3);
+
+       
+
+        
+
 
 
         
@@ -129,6 +125,12 @@ let initalSetup = function ()  {
 
 };//end initial step
 
+
+let buttonHandler = function(event) {
+
+
+    console.log(event.target);
+}
 
 
 
@@ -171,3 +173,6 @@ setInterval(function() {
 initalSetup();
 
 //Listeners
+document.addEventListener("click", buttonHandler)
+
+
