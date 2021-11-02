@@ -59,13 +59,68 @@ let hoursObj = [
     }
 ];
 
-console.log(hoursObj);
 
-// DEBUG STUFF
+// DEBUG
 debugTime = 9;
 
+//#region  Functions
 
-// Functions
+
+/*  Function: CheckDueDates()
+    => checks the due dates and colors tasks accordingly.
+    args: none
+    return: none
+*/
+
+let checkDueDates = function() {
+    
+    // debug
+    //tmpTimeStr = 9;
+    tmpTimeStr = debugTime;
+ 
+     for (let i = 0; i < 9; i++) {
+         // lets change colors based on time
+         // add the task section to the middle
+         let tmpStr2 = "hour" + i + "taskDivEl";
+         let objName2 = tmpStr2;
+ 
+         idStr =("#hour" + i + "TaskID") ;
+         taskTimeStr = hoursObj[i].milText;
+         taskTimeStr = parseInt(taskTimeStr);
+ 
+         // Past so assign past class
+         if(tmpTimeStr > taskTimeStr) {
+             $(idStr).removeClass("future present");
+             $(idStr).addClass("past");
+            // console.log(idStr + " is past");
+ 
+         }
+         // present to assign present class
+          else if (tmpTimeStr === taskTimeStr ) {
+             $(idStr).removeClass("future past");
+             $(idStr).addClass("present");
+            // console.log(idStr + " is present");
+ 
+         } 
+         // future so assign future class
+         else if(tmpTimeStr < taskTimeStr) {
+         
+             $(idStr).removeClass("present past");
+             $(idStr).addClass("future");
+            // let tempObj = $(idStr);
+           //  console.log(tempObj);
+            // console.log(idStr + " is future");
+         } 
+         
+     }
+ 
+ }
+
+/*  Function: loadSavedTasks 
+    => used to load tasks from localStorage
+    args: none
+    return: savedTasks
+*/
 let loadSavedTasks = function() {
 
     let savedTasks = localStorage.getItem("savedTasks");
@@ -76,32 +131,26 @@ let loadSavedTasks = function() {
        // savedTasks = JSON.parse(savedTasks);
        // numOfTasks = savedTasks.length;
        savedTasks = JSON.parse(localStorage.getItem("savedTasks"));
-       return savedTasks;
-
+      
     }
-    // only show high scores tha
-
-
-
+    
+    return savedTasks;
 };
-
+/*  Function: saveTasks() 
+    => used to save tasks to localStorage
+    args: none
+    return: none
+*/
 let saveTasks = function(savedTasks) {
-//debugger;
-
-
 
     if (!savedTasks) {
         savedTasks = [];
         numOfTasks = 0;
     } 
-       // savedTasks = JSON.parse(savedTasks);
-       // numOfTasks = savedTasks.length;
-
-
-       // only show high scores tha
+      
 
     $(".time-block").each(function(index, element) {
-       // debugger;
+   
         // element == this
         tmpText = $(element).text();
         console.log(tmpText+ "" + index);
@@ -114,7 +163,36 @@ let saveTasks = function(savedTasks) {
     localStorage.setItem("savedTasks", JSON.stringify(savedTasks));
    
    
-  }//end saveTasks()
+}//end saveTasks()
+
+// GOING TO REMOVE I THINK
+//
+//
+//
+
+  let refreshScreen = function(){
+   
+    let savedTasks = loadSavedTasks();
+
+
+
+    $(".time-block").each(function(index, element) {
+        // debugger;
+         // element == this
+        // debugger;
+         $(element).text(savedTasks[index]);
+         console.log(savedTasks[index]);
+        // console.log(tmpText+ "" + index);
+ 
+        // savedTasks[index] = tmpText;
+  
+     });
+
+    console.log("in refresh screen")
+
+    checkDueDates();
+    
+  }
 
 /*  Function: initialSetup()  
     => used to handle the button clicks
@@ -188,14 +266,17 @@ let initalSetup = function ()  {
     
 };//end initial step
 
+//#endregion 
+
+//#region EventListeners
+
+
+// if saveBtn clicked save the tasks
 $(".container").on("click", ".saveBtn", function() {
-    console.log("save clicked");
+    console.log("save clicked");  
     saveTasks();
-
-
 });
-
-
+// Converts .time-block to a textarea for editing.
 $(".container").on("click", ".time-block", function() {
 
     var text = $(this)
@@ -208,15 +289,14 @@ $(".container").on("click", ".time-block", function() {
         .val(text);
     $(this).replaceWith(textInput);
     textInput.trigger("focus");
-
-  //  $("textarea").addClass("crap");
+  // HACK
     $("textarea").attr("id", "textareaHack");
 
     console.log(this);
 });
-
+// converts the textarea back to a p
 $(".container").on("blur", "textarea", function() {
-
+  
     var text = $(this)
         .val()
         .trim();
@@ -224,28 +304,20 @@ $(".container").on("blur", "textarea", function() {
     console.log("inside the BLUR");
     console.log(text);
 
-    // var status = $(this)
-    //     .closest(".time-block")
-    //     .attr("id")
-    //     .replace("list-", "");
-  //  debugger;
     this.text = text;
     let taskP = $("<p>")
         .addClass("time-block")
         .text(text);
 
-        console.log(this.parentElement.id);
-
-       // idStr =("hour" + i + "TaskID") ;
-        $(taskP).attr("id", this.parentElement.id);
+    console.log(this.parentElement.id);
+    $(taskP).attr("id", this.parentElement.id);
 
     // replace text area with p element
     $(this).replaceWith(taskP);
 
+   // refreshScreen();
 
 });
-
-
 
 
 let buttonHandler = function(event) {
@@ -267,82 +339,9 @@ let buttonHandler = function(event) {
     }
 }
 
-let checkDueDates = function() {
-    
-   // debug
-   tmpTimeStr = debugTime;
-  // console.log("currentTime= " + tmpTimeStr)
-   // DEBUG DEBUG
-    tmpTimeStr = parseInt(tmpTimeStr);
-  //  console.log(tmpTimeStr);
+//#endregion
 
-    for (let i = 0; i < 9; i++) {
-        // lets change colors based on time
-        // add the task section to the middle
-        let tmpStr2 = "hour" + i + "taskDivEl";
-        let objName2 = tmpStr2;
-
-        idStr =("#hour" + i + "TaskID") ;
-        taskTimeStr = hoursObj[i].milText;
-        taskTimeStr = parseInt(taskTimeStr);
-
-
-        // Past so assign past class
-        if(tmpTimeStr > taskTimeStr) {
-            $(idStr).removeClass("future present");
-            $(idStr).addClass("past");
-           // console.log(idStr + " is past");
-
-        }
-        // present to assign present class
-         else if (tmpTimeStr === taskTimeStr ) {
-            $(idStr).removeClass("future past");
-            $(idStr).addClass("present");
-           // console.log(idStr + " is present");
-
-        } 
-        // future so assign future class
-        else if(tmpTimeStr < taskTimeStr) {
-        
-            $(idStr).removeClass("present past");
-            $(idStr).addClass("future");
-           // let tempObj = $(idStr);
-          //  console.log(tempObj);
-           // console.log(idStr + " is future");
-        } 
-        
-    }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// timers
-
-
+//#region Timers
 
 setInterval(function() {
     //Check the time and update event's colors based on time
@@ -361,6 +360,7 @@ setInterval(function() {
    //checkDueDates();
 }, (1000 * 10)); // Every 10 sec
 
+//#endregion
 
 // Function Calls
 initalSetup();
