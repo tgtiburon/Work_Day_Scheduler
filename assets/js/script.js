@@ -68,13 +68,15 @@ debugTime = 9;
 // Functions
 let loadSavedTasks = function() {
 
-    let savedTasks = localStorage.getItem("tasks");
+    let savedTasks = localStorage.getItem("savedTasks");
     if (!savedTasks) {
         savedTasks = [];
         numOfTasks = 0;
     } else {
        // savedTasks = JSON.parse(savedTasks);
        // numOfTasks = savedTasks.length;
+       savedTasks = JSON.parse(localStorage.getItem("savedTasks"));
+       return savedTasks;
 
     }
     // only show high scores tha
@@ -97,59 +99,19 @@ let saveTasks = function(savedTasks) {
 
 
        // only show high scores tha
-//debugger;
-// NO IDEA IF THIS WILL WORK
 
     $(".time-block").each(function(index, element) {
-        debugger;
+       // debugger;
         // element == this
-        tmpText = $(element).html();
+        tmpText = $(element).text();
         console.log(tmpText+ "" + index);
 
-
-
-        ///////////////////////////works..iterrates through
-
-
+        savedTasks[index] = tmpText;
+ 
     });
+    console.log(savedTasks);
 
-
-    // for (let i = 0; i < 9; i++) {
-    //     // save the tasks to localStorage
-
-    //    // idStr =("hour" + i + "TaskID") ;
-    //    // $(objName2).attr("id", idStr);
-
-    //   //debugger;
-
-    //     // DEBUG --- put a <p> in it
-    //     let objPName ="#hour" + i + "taskPDivEl";
-    //    // objPName = $("<p>")
-    //       //  .addClass("time-block")
-    //       //  .text("Inside a <p>");
-         
-        
-    //   // debugger;
-    //     tmpText = $(objPName).text();
-    //      //tmpText = $(objPName).html();
-    //     // console.log(tmpText);
-    //     // console.log($(objPName));
-    //     // console.log($(".container time-block"));
-
-    //    // $(".container").append(objName2);
-    //    // $(objName2).append(objPName);
-    //     ////////////console.log(objName2);
-    //     savedTasks[i] = tmpText;
-    //     console.log(savedTasks);
-       
-
-    
-    
-        
-        
-    // }
-  //  debugger;
-    localStorage.setItem("tasks", JSON.stringify(savedTasks));
+    localStorage.setItem("savedTasks", JSON.stringify(savedTasks));
    
    
   }//end saveTasks()
@@ -162,7 +124,8 @@ let saveTasks = function(savedTasks) {
 
 let initalSetup = function ()  {
     // load save
-    loadSavedTasks();
+    //debugger;
+    let savedTasks = loadSavedTasks();
 
     //create elements to make the hourly list
     for (let i = 0; i < 9; i++) {
@@ -200,7 +163,8 @@ let initalSetup = function ()  {
         let objPName ="hour" + i + "taskPDivEl";
         objPName = $("<p>")
             .addClass("time-block")
-            .text("Inside a <p>");
+            //.text("Inside a <p> "+ i);
+            .text(savedTasks[i])
         idStr =("hour" + i + "taskPDivEl") ;
         $(objPName).attr("id", idStr);
 
@@ -213,12 +177,12 @@ let initalSetup = function ()  {
         let tmpStr3 = "hour" + i + "taskDivEl";
         let objName3 = tmpStr3;
         objName3 = $("<div>")
-        .addClass("saveBtn col-1 border border-dark ");
+        .addClass("saveBtn oi oi-lock-locked col-1 border border-dark ");
         idStr =("hour" + i + "SaveID") ;
         $(objName3).attr("id", idStr);
 
         $(".container").append(objName3);
-        ////////console.log(objName3);    
+   
     }
     checkDueDates();
     
@@ -233,8 +197,6 @@ $(".container").on("click", ".saveBtn", function() {
 
 
 $(".container").on("click", ".time-block", function() {
-    //debugger;
-   // $(".time-block");
 
     var text = $(this)
         .text()
@@ -249,13 +211,6 @@ $(".container").on("click", ".time-block", function() {
 
   //  $("textarea").addClass("crap");
     $("textarea").attr("id", "textareaHack");
-
-
-
-        
-    
-        
-
 
     console.log(this);
 });
@@ -288,34 +243,12 @@ $(".container").on("blur", "textarea", function() {
     $(this).replaceWith(taskP);
 
 
-
-
-
 });
 
 
 
 
-
-
-
-
-//  kludge for bootstrap
-// $(document).on('click', '.time-block',  function() {
-//     //debugger;
-
-//     console.log(this);
-// });
-
-
-
-
-
 let buttonHandler = function(event) {
-
-//debugger;
-   // console.log(event.target);
-
 
 
     //DEBUG
