@@ -6,14 +6,27 @@ body {
   /* min-height: 400px; */
 }
 
-textarea{
+textarea {
   background: transparent;
   border: none;
   resize: none;
   color: #000000;
   border-left: 1px solid black;
   padding: 10px;
-  background-color: red;
+  background-color:yellow;
+}
+#textareaHack {
+  background: transparent;
+  border: none;
+  resize: none;
+  color: #000000;
+  border-left: 1px solid black;
+  padding: 10px;
+  
+ 
+}
+.time-block {
+  
 }
 
 .jumbotron {
@@ -31,10 +44,14 @@ textarea{
 }
 
 .time-block{
-  text-align: center;
+  text-align: left;
+  color:black;
+  padding-top: 2%;
+  
   /* border-radius: 15px; */
   /* border: 20px solid green; */
   /* background-color: red; */
+  
   
 }
 

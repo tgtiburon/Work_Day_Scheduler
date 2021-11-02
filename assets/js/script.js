@@ -66,7 +66,93 @@ debugTime = 9;
 
 
 // Functions
+let loadSavedTasks = function() {
 
+    let savedTasks = localStorage.getItem("tasks");
+    if (!savedTasks) {
+        savedTasks = [];
+        numOfTasks = 0;
+    } else {
+       // savedTasks = JSON.parse(savedTasks);
+       // numOfTasks = savedTasks.length;
+
+    }
+    // only show high scores tha
+
+
+
+};
+
+let saveTasks = function(savedTasks) {
+//debugger;
+
+
+
+    if (!savedTasks) {
+        savedTasks = [];
+        numOfTasks = 0;
+    } 
+       // savedTasks = JSON.parse(savedTasks);
+       // numOfTasks = savedTasks.length;
+
+
+       // only show high scores tha
+//debugger;
+// NO IDEA IF THIS WILL WORK
+
+    $(".time-block").each(function(index, element) {
+        debugger;
+        // element == this
+        tmpText = $(element).html();
+        console.log(tmpText+ "" + index);
+
+
+
+        ///////////////////////////works..iterrates through
+
+
+    });
+
+
+    // for (let i = 0; i < 9; i++) {
+    //     // save the tasks to localStorage
+
+    //    // idStr =("hour" + i + "TaskID") ;
+    //    // $(objName2).attr("id", idStr);
+
+    //   //debugger;
+
+    //     // DEBUG --- put a <p> in it
+    //     let objPName ="#hour" + i + "taskPDivEl";
+    //    // objPName = $("<p>")
+    //       //  .addClass("time-block")
+    //       //  .text("Inside a <p>");
+         
+        
+    //   // debugger;
+    //     tmpText = $(objPName).text();
+    //      //tmpText = $(objPName).html();
+    //     // console.log(tmpText);
+    //     // console.log($(objPName));
+    //     // console.log($(".container time-block"));
+
+    //    // $(".container").append(objName2);
+    //    // $(objName2).append(objPName);
+    //     ////////////console.log(objName2);
+    //     savedTasks[i] = tmpText;
+    //     console.log(savedTasks);
+       
+
+    
+    
+        
+        
+    // }
+  //  debugger;
+    localStorage.setItem("tasks", JSON.stringify(savedTasks));
+   
+   
+  }//end saveTasks()
 
 /*  Function: initialSetup()  
     => used to handle the button clicks
@@ -75,6 +161,8 @@ debugTime = 9;
 */
 
 let initalSetup = function ()  {
+    // load save
+    loadSavedTasks();
 
     //create elements to make the hourly list
     for (let i = 0; i < 9; i++) {
@@ -103,12 +191,21 @@ let initalSetup = function ()  {
         let tmpStr2 = "hour" + i + "taskDivEl";
         let objName2 = tmpStr2;
         objName2 = $("<div>")
-        .addClass("time-block col-10  border")
-        .text("Sample text");
+        .addClass("taskDiv col-10 border");//add time-block back if needed
+       // .text("Sample text");
         idStr =("hour" + i + "TaskID") ;
         $(objName2).attr("id", idStr);
 
+        // DEBUG --- put a <p> in it
+        let objPName ="hour" + i + "taskPDivEl";
+        objPName = $("<p>")
+            .addClass("time-block")
+            .text("Inside a <p>");
+        idStr =("hour" + i + "taskPDivEl") ;
+        $(objPName).attr("id", idStr);
+
         $(".container").append(objName2);
+        $(objName2).append(objPName);
         ////////////console.log(objName2);
 
 
@@ -116,7 +213,7 @@ let initalSetup = function ()  {
         let tmpStr3 = "hour" + i + "taskDivEl";
         let objName3 = tmpStr3;
         objName3 = $("<div>")
-        .addClass("saveBtn col-1  border border-dark ");
+        .addClass("saveBtn col-1 border border-dark ");
         idStr =("hour" + i + "SaveID") ;
         $(objName3).attr("id", idStr);
 
@@ -127,28 +224,124 @@ let initalSetup = function ()  {
     
 };//end initial step
 
+$(".container").on("click", ".saveBtn", function() {
+    console.log("save clicked");
+    saveTasks();
+
+
+});
+
+
+$(".container").on("click", ".time-block", function() {
+    //debugger;
+   // $(".time-block");
+
+    var text = $(this)
+        .text()
+        .trim();
+    console.log(text);
+    console.log(this);
+    var textInput = $("<textarea>")
+        .addClass("form-control")
+        .val(text);
+    $(this).replaceWith(textInput);
+    textInput.trigger("focus");
+
+  //  $("textarea").addClass("crap");
+    $("textarea").attr("id", "textareaHack");
+
+
+
+        
+    
+        
+
+
+    console.log(this);
+});
+
+$(".container").on("blur", "textarea", function() {
+
+    var text = $(this)
+        .val()
+        .trim();
+
+    console.log("inside the BLUR");
+    console.log(text);
+
+    // var status = $(this)
+    //     .closest(".time-block")
+    //     .attr("id")
+    //     .replace("list-", "");
+  //  debugger;
+    this.text = text;
+    let taskP = $("<p>")
+        .addClass("time-block")
+        .text(text);
+
+        console.log(this.parentElement.id);
+
+       // idStr =("hour" + i + "TaskID") ;
+        $(taskP).attr("id", this.parentElement.id);
+
+    // replace text area with p element
+    $(this).replaceWith(taskP);
+
+
+
+
+
+});
+
+
+
+
+
+
+
+
+//  kludge for bootstrap
+// $(document).on('click', '.time-block',  function() {
+//     //debugger;
+
+//     console.log(this);
+// });
+
+
+
+
 
 let buttonHandler = function(event) {
 
+//debugger;
+   // console.log(event.target);
 
-    //console.log(event.target);
+
+
     //DEBUG
-    debugTime++ // raise the time
-    checkDueDates();
-    if (debugTime > 17) {
+    if (event.target.id === "currentDay") {
+        
 
-        debugTime = 8;
-    }   
+        debugTime++ // raise the time
+        checkDueDates();
+        if (debugTime > 17) {
+    
+            debugTime = 8;
+        }   
+        //console.log( $( this ).text());
+
+
+    }
 }
 
 let checkDueDates = function() {
     
    // debug
    tmpTimeStr = debugTime;
-   console.log("currentTime= " + tmpTimeStr)
+  // console.log("currentTime= " + tmpTimeStr)
    // DEBUG DEBUG
     tmpTimeStr = parseInt(tmpTimeStr);
-    console.log(tmpTimeStr);
+  //  console.log(tmpTimeStr);
 
     for (let i = 0; i < 9; i++) {
         // lets change colors based on time
@@ -165,14 +358,14 @@ let checkDueDates = function() {
         if(tmpTimeStr > taskTimeStr) {
             $(idStr).removeClass("future present");
             $(idStr).addClass("past");
-            console.log(idStr + " is past");
+           // console.log(idStr + " is past");
 
         }
         // present to assign present class
          else if (tmpTimeStr === taskTimeStr ) {
             $(idStr).removeClass("future past");
             $(idStr).addClass("present");
-            console.log(idStr + " is present");
+           // console.log(idStr + " is present");
 
         } 
         // future so assign future class
@@ -180,9 +373,9 @@ let checkDueDates = function() {
         
             $(idStr).removeClass("present past");
             $(idStr).addClass("future");
-            let tempObj = $(idStr);
-            console.log(tempObj);
-            console.log(idStr + " is future");
+           // let tempObj = $(idStr);
+          //  console.log(tempObj);
+           // console.log(idStr + " is future");
         } 
         
     }
