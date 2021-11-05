@@ -273,8 +273,12 @@ let initalSetup = function ()  {
 
 // if saveBtn clicked save the tasks
 $(".container").on("click", ".saveBtn", function() {
+
+    debugger;
     console.log("save clicked");  
+    console.log(this);
     saveTasks();
+   
 });
 // Converts .time-block to a textarea for editing.
 $(".container").on("click", ".time-block", function() {

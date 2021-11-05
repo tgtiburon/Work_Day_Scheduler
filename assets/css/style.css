@@ -2,8 +2,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1;
-  /* border: 3px solid red; */
-  /* min-height: 400px; */
+ 
 }
 
 
@@ -22,6 +21,7 @@ textarea {
   border: none;
   resize: none;
   color: #000000;
+  
   border-left: 1px solid black;
   /* padding: 10px; */
   height: 100%;
@@ -49,30 +49,21 @@ textarea {
 .time-block{
   text-align: left;
   color:black;
-  /* padding-top: 2%; */
-  
-  /* border-radius: 15px; */
-  /* border: 20px solid green; */
-  /* background-color: red; */
-  
-  
+
 }
 .container p {
 
-  /* background-color: purple; */
   height: 100%;
   padding-top: 10px;
   margin:0px;
+  font-weight: bold;
 }
 
 .row {
   white-space: pre-wrap;
   height: 80px;
   border-top: 1px solid white;
-  /* background-color: red; */
-  
-  
-  
+
 }
 
 .hour {
@@ -80,8 +71,7 @@ textarea {
   color: #000000;
   border-top: 1px dashed #000000;
   padding-top: 2%;
-  
- 
+
 }
 
 .past {
@@ -116,12 +106,6 @@ textarea {
   /* background-color: red; */
 } 
 
- /* .saveBtn i:hover {
-  font-size: 20px;
-  transition: all .3s ease-in-out;
-  background-color: red;
-}  */
-
 .container {
   
   /* border: 3px solid yellow; */
@@ -129,8 +113,6 @@ textarea {
   padding-bottom: 5%;
   
 }
-
-
 
 .footer {
   border: 3px solid black;
