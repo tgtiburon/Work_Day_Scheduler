@@ -1,15 +1,15 @@
 # Work_Day_Scheduler
 
 
-<img src="./assets/images/WebAPISCRN.PNG"
-     alt="The user interface of Quizzer the Web API Edition."
+<img src="./assets/images/Work_day_Scheduler_scrn.PNG"
+     alt="The user interface of the Work Day Scheduler App."
       />
 
 
 
 
 ## Purpose
-A website that allows the user to schedule events for each hour of the day.  It will dynamically update the events and color code them realtive to when they are due. 
+A website that allows the user to schedule events for each hour of the day.  It will dynamically update the events and color code them realtive to when they are due.  Red means that the item is due right now.  Green means it is in the future, and grey means it is in the past. 
 
 
 ## Built with
@@ -27,20 +27,18 @@ A website that allows the user to schedule events for each hour of the day.  It 
     * Working with strings.
     * Working with complicated logic
     * Dynamically creating web elements.
-    * Using localStorage to save a high scores list.
-    * Using states in the program to track the current screen
-      so the user can check the High Scores at anytime and return
-      to the exact screen they were at.  
-    * Use of a timer to track a countdown.  Timer is paused when the
-      the user checks high score and starts working again when they
-      return to the quiz.
-    * Responsive design.
+    * Using localStorage to save tasks that are scheduled throughout the day.
+    * Use of a timer to periodically call moment.js for the current time.
+    
 
 
 
 
-## Website
+##  Relevent Websites
+#### Live Website: 
 https://tgtiburon.github.io/Work_Day_Scheduler/
+#### Github Repository:
+https://github.com/tgtiburon/Work_Day_Scheduler
 
 ##
 
