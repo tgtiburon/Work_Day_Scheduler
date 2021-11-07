@@ -168,7 +168,7 @@ let initalSetup = function ()  {
         $(".container").append(objName2);
         $(objName2).append(objPName);
       
-        
+
         //add the save button to the right
         objName3 = $("<div>")
         .addClass("saveBtn fas fa-save  col-2 col-l-1 border border-dark ");
@@ -190,7 +190,7 @@ let initalSetup = function ()  {
 $(".container").on("click", ".saveBtn", function() {
  
     // traverse the dom to get the text from the row
-    let text = ($(this).prev(".col-10").children("p").text());
+    let text = ($(this).prev(".col-8").children("p").text());
     // get the index
     let index = $(this).attr("myindex");
     // load all the current tasks
