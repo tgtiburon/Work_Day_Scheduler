@@ -68,6 +68,8 @@ let hoursObj = [
 */
 
 let checkDueDates = function() {
+
+    
     
     let currentTime = moment().hour();
    
@@ -144,19 +146,19 @@ let initalSetup = function ()  {
          // creating a string to make our elementname
          let objName1 = "hour" + i + "TextDivEl";
          objName1 = $("<div>")
-            .addClass("hour col-1 ")
+            .addClass("hour col-2 col-l-1")
             .text(hoursObj[i].hourText);
          $(".container").append(objName1);
 
 
         // add the task section to the middle
         objName2 = $("<div>")
-        .addClass("taskDiv col-10 border");//add time-block back if needed
+        .addClass("taskDiv col-8 col-l-10 border");
 
         idStr =("hour" + i + "TaskID") ;
        $(objName2).attr("id", idStr);
 
-      //  let objPName ="hour" + i + "taskPDivEl";
+      // Add a p element to store the tesk text.
         objPName = $("<p>")
             .addClass("time-block")
             .text(savedTasks[i])
@@ -166,10 +168,10 @@ let initalSetup = function ()  {
         $(".container").append(objName2);
         $(objName2).append(objPName);
       
-
+        
         //add the save button to the right
         objName3 = $("<div>")
-        .addClass("saveBtn fas fa-save  col-1 border border-dark ");
+        .addClass("saveBtn fas fa-save  col-2 col-l-1 border border-dark ");
         $(objName3).attr("myindex" , i);
 
         $(".container").append(objName3);
@@ -238,6 +240,7 @@ setInterval(function() {
    tmpTimeStr = tmpTimeStr + ", " + moment().format('MMMM Do');
    // lets put the current date up
    $("#currentDay").text(tmpTimeStr);
+   checkDueDates();
 
 }, (1000 * 15)); // Every 15 sec
 

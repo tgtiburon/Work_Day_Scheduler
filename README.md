@@ -9,7 +9,7 @@
 
 
 ## Purpose
-A website that allows the user to schedule events for each hour of the day.  It will dynamically update the events and color code them realtive to when they are due.  Red means that the item is due right now.  Green means it is in the future, and grey means it is in the past. 
+A website that allows the user to schedule events for each hour of the work day.  It will dynamically update the events and color code them realtive to when they are due.  Red means that the item is due right now.  Green means it is in the future, and grey means it is in the past. 
 
 
 ## Built with

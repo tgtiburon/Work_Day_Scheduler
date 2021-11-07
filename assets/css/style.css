@@ -58,6 +58,7 @@ textarea {
   color: #000000;
   border-top: 1px dashed #000000;
   padding-top: 2%;
+  text-align: right;
 
 }
 
@@ -101,16 +102,17 @@ textarea {
 }
 
 .footer {
-  border: 3px solid black;
+  border-top: 1px solid black;
   z-index: 10;
-  background: black;
-  color: white;
-  display:flex;
-  justify-content: center;
-  align-items: bottom;
+  background: white;
   width: 100%;
-  font-size:1.0vw;
-  height: 25px;
-  
+  height: 30px;
 
-}
+  /* The lines below are if I add back my Name in the footer */
+  /* color: white; */
+  /* display:flex; */
+  /* justify-content: center; */
+  /* align-items: bottom; */
+  /* font-size:1.0vw; */
+
+} 
